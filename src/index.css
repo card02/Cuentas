@@ -1,0 +1,204 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/plus-jakarta-sans';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+:root {
+  color-scheme: light;
+  --bg: #f3f5f4;
+  --surface: #ffffff;
+  --surface-2: #f4f7f5;
+  --surface-3: #e9eeeb;
+  --ink: #0f1a17;
+  --ink-2: #44524c;
+  --ink-3: #5f6e68;
+  --line: rgb(15 26 23 / 0.08);
+  --line-strong: rgb(15 26 23 / 0.16);
+  --brand: #047857;
+  --brand-hover: #065f46;
+  --brand-ink: #047857;
+  --brand-soft: rgb(4 120 87 / 0.1);
+  --good: #047857;
+  --warn: #a15c00;
+  --bad: #c42b2b;
+  --grid: #e6eae8;
+  --axis: #c3cbc7;
+  /* Series de las gráficas (validadas para daltonismo sobre la superficie clara). */
+  --series-fixed: #2a78d6;
+  --series-spend: #eb6834;
+  --series-free: #1baf7a;
+  --hero-from: #064e3b;
+  --hero-via: #047857;
+  --hero-to: #0d9488;
+  --shadow: 0 1px 2px rgb(15 26 23 / 0.04), 0 1px 1px rgb(15 26 23 / 0.02);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0a0f0d;
+  --surface: #141b18;
+  --surface-2: #1a2320;
+  --surface-3: #232e2a;
+  --ink: #e8eeeb;
+  --ink-2: #b3bfba;
+  --ink-3: #8d9a95;
+  --line: rgb(255 255 255 / 0.08);
+  --line-strong: rgb(255 255 255 / 0.16);
+  --brand: #059669;
+  --brand-hover: #10b981;
+  --brand-ink: #34d399;
+  --brand-soft: rgb(52 211 153 / 0.12);
+  --good: #34d399;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --grid: #222b28;
+  --axis: #36433e;
+  --series-fixed: #3987e5;
+  --series-spend: #d95926;
+  --series-free: #199e70;
+  --hero-from: #022c22;
+  --hero-via: #064e3b;
+  --hero-to: #115e59;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+}
+
+@theme inline {
+  --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-series-fixed: var(--series-fixed);
+  --color-series-spend: var(--series-spend);
+  --color-series-free: var(--series-free);
+  --shadow-card: var(--shadow);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    min-height: 100dvh;
+  }
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand-ink);
+    outline-offset: 2px;
+  }
+  input[type='date']::-webkit-calendar-picker-indicator {
+    opacity: 0.6;
+  }
+  [data-theme='dark'] input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-card;
+  }
+  .field {
+    @apply w-full rounded-xl border border-line-strong bg-surface px-3.5 py-2.5 text-[15px] text-ink placeholder:text-ink-3 transition outline-none focus:border-brand-ink focus:ring-3 focus:ring-brand-soft;
+  }
+  .label {
+    @apply mb-1.5 block text-[13px] font-semibold text-ink-2;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Hoja / diálogo: hoja inferior en el celular, ventana centrada en pantallas grandes. */
+dialog.sheet {
+  margin: auto auto 0;
+  width: 100%;
+  max-width: 34rem;
+  max-height: min(92dvh, 52rem);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  overflow: visible;
+}
+dialog.sheet::backdrop {
+  background: rgb(5 12 10 / 0.5);
+  backdrop-filter: blur(2px);
+}
+dialog.sheet[open] > .sheet-panel {
+  animation: sheet-up 0.24s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+dialog.sheet[open]::backdrop {
+  animation: fade-in 0.2s ease-out;
+}
+@media (min-width: 640px) {
+  dialog.sheet {
+    margin: auto;
+  }
+  dialog.sheet[open] > .sheet-panel {
+    animation: pop-in 0.18s ease-out;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+@keyframes pop-in {
+  from {
+    transform: scale(0.97);
+    opacity: 0;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes toast-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  dialog.sheet::backdrop {
+    animation: none !important;
+    transition: none !important;
+  }
+}

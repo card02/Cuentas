@@ -1,0 +1,125 @@
+import {
+  Baby,
+  BookOpen,
+  Briefcase,
+  Bus,
+  Car,
+  Coffee,
+  Coins,
+  CreditCard,
+  Dog,
+  Droplet,
+  Dumbbell,
+  Film,
+  Fuel,
+  Gamepad2,
+  Gift,
+  GraduationCap,
+  HandCoins,
+  HeartPulse,
+  House,
+  Landmark,
+  Laptop,
+  Lightbulb,
+  Package,
+  PiggyBank,
+  Pill,
+  Plane,
+  Receipt,
+  Scissors,
+  Shirt,
+  ShoppingCart,
+  Smartphone,
+  Sofa,
+  Store,
+  Tv,
+  Utensils,
+  Wallet,
+  Wifi,
+  Wrench,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react'
+import type { ColorName } from '../types'
+
+export const icons = {
+  house: House,
+  car: Car,
+  landmark: Landmark,
+  smartphone: Smartphone,
+  fuel: Fuel,
+  'shopping-cart': ShoppingCart,
+  utensils: Utensils,
+  coffee: Coffee,
+  'heart-pulse': HeartPulse,
+  pill: Pill,
+  film: Film,
+  gamepad: Gamepad2,
+  tv: Tv,
+  shirt: Shirt,
+  scissors: Scissors,
+  wrench: Wrench,
+  bus: Bus,
+  plane: Plane,
+  zap: Zap,
+  droplet: Droplet,
+  lightbulb: Lightbulb,
+  wifi: Wifi,
+  sofa: Sofa,
+  'graduation-cap': GraduationCap,
+  'book-open': BookOpen,
+  gift: Gift,
+  dog: Dog,
+  baby: Baby,
+  dumbbell: Dumbbell,
+  laptop: Laptop,
+  store: Store,
+  receipt: Receipt,
+  'credit-card': CreditCard,
+  'hand-coins': HandCoins,
+  coins: Coins,
+  'piggy-bank': PiggyBank,
+  briefcase: Briefcase,
+  wallet: Wallet,
+  package: Package,
+} satisfies Record<string, LucideIcon>
+
+export type IconName = keyof typeof icons
+
+export const iconNames = Object.keys(icons) as IconName[]
+
+export function getIcon(name: string): LucideIcon {
+  return icons[name as IconName] ?? Package
+}
+
+/** Tintes para las insignias de iconos (decorativos; el texto siempre usa tinta neutra). */
+export const colorClasses: Record<ColorName, string> = {
+  emerald: 'bg-emerald-500/12 text-emerald-700 dark:bg-emerald-400/15 dark:text-emerald-300',
+  teal: 'bg-teal-500/12 text-teal-700 dark:bg-teal-400/15 dark:text-teal-300',
+  sky: 'bg-sky-500/12 text-sky-700 dark:bg-sky-400/15 dark:text-sky-300',
+  indigo: 'bg-indigo-500/12 text-indigo-700 dark:bg-indigo-400/15 dark:text-indigo-300',
+  violet: 'bg-violet-500/12 text-violet-700 dark:bg-violet-400/15 dark:text-violet-300',
+  pink: 'bg-pink-500/12 text-pink-700 dark:bg-pink-400/15 dark:text-pink-300',
+  rose: 'bg-rose-500/12 text-rose-700 dark:bg-rose-400/15 dark:text-rose-300',
+  orange: 'bg-orange-500/12 text-orange-700 dark:bg-orange-400/15 dark:text-orange-300',
+  amber: 'bg-amber-500/15 text-amber-700 dark:bg-amber-400/15 dark:text-amber-300',
+  lime: 'bg-lime-500/15 text-lime-700 dark:bg-lime-400/15 dark:text-lime-300',
+  slate: 'bg-slate-500/12 text-slate-700 dark:bg-slate-400/15 dark:text-slate-300',
+}
+
+export const colorNames = Object.keys(colorClasses) as ColorName[]
+
+/** Color sólido para las muestras del selector de color. */
+export const colorSwatch: Record<ColorName, string> = {
+  emerald: 'bg-emerald-500',
+  teal: 'bg-teal-500',
+  sky: 'bg-sky-500',
+  indigo: 'bg-indigo-500',
+  violet: 'bg-violet-500',
+  pink: 'bg-pink-500',
+  rose: 'bg-rose-500',
+  orange: 'bg-orange-500',
+  amber: 'bg-amber-500',
+  lime: 'bg-lime-500',
+  slate: 'bg-slate-500',
+}

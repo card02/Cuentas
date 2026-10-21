@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es-GT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Mis Cuentas</title>
+    <meta name="description" content="Controla tu salario, pagos fijos y gastos en quetzales." />
+    <meta name="theme-color" content="#f3f5f4" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Cuentas" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <script>
+      // Aplica el tema guardado antes de pintar, para evitar un destello de color.
+      try {
+        var saved = JSON.parse(localStorage.getItem('mis-cuentas:datos') || '{}')
+        var pref = (saved.state && saved.state.settings && saved.state.settings.theme) || 'system'
+        var dark = pref === 'dark' || (pref === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
